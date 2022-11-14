@@ -1,5 +1,4 @@
 //creating a list that contain objects. An  object is a task and conatains all it's caracteristics
-//adding some data for having something to show
 const tasks = [];
 
 // Selecting all the dom element from the index.html that we will use later
@@ -14,19 +13,21 @@ addButton.addEventListener("click", () => {
   const deadline = deadlineInput.value;
   const important = importantInput.checked;
 
+  //creating the object of the task with the values
   const task = {
     name,
     deadline,
     important,
   };
-  console.log(important);
   tasks.push(task);
 
   updateview();
 });
 
 const updateview = () => {
+  //removing the table body
   tbody.innerHTML = "";
+  // creating the new body with the updated informations
   tasks.forEach((task, index) => {
     const tr = document.createElement("tr");
     if (task.important) {
@@ -41,13 +42,15 @@ const updateview = () => {
     const deleteTd = document.createElement("td");
     const deleteButton = document.createElement("button");
     deleteButton.classList = "btn btn-warning";
-    deleteButton.textContent = "Supprimer";
+    deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => {
+      //function to delete the task from the array
       tasks.splice(index, 1);
+      //then we update the view
       updateview();
-      console.log(index);
     });
 
+    //append all the child
     deleteTd.appendChild(deleteButton);
     tr.appendChild(nameTd);
     tr.appendChild(deadlineTd);
